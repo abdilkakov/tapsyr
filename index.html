@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tapsyr - Интерактивті білім беру платформасы</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3763/3763365.png" type="image/png">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="logo" id="logo-home">
+                <i class="fas fa-puzzle-piece"></i>
+                <h1>Tapsyr</h1>
+            </div>
+            <div class="nav-buttons">
+                <button id="create-btn" class="primary-btn">Тапсырма жасау</button>
+                <button id="my-tasks-btn" class="secondary-btn">Менің тапсырмаларым</button>
+            </div>
+        </header>
+
+        <main>
+            <section id="welcome-section" class="active-section">
+                <div class="hero">
+                    <h2><span class="gradient-text">Интерактивті</span> оқу іс-шараларын жасаңыз</h2>
+                    <p>Оқушыларды қызықты және интерактивті оқыту тапсырмаларымен қызықтырыңыз</p>
+                    <button id="get-started-btn" class="primary-btn">Бастау</button>
+                </div>
+                
+                <div class="welcome-features">
+                    <h2>Тапсыр оқыту платформасы - Мұғалімдердің ең жақсы таңдауы</h2>
+                    <p class="welcome-description">Оқушылар үшін тартымды және пайдалы оқу тапсырмаларын жасаудың ең оңай жолы. Біздің платформа сіздің сабақтарыңызды қызықты етуге көмектеседі.</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-bolt"></i>
+                            <h3>Тез және оңай</h3>
+                            <p>Бірнеше минут ішінде тапсырмаларды жасаңыз</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-language"></i>
+                            <h3>Көптілді қолдау</h3>
+                            <p>Қазақ және басқа тілдерде тапсырмалар жасаңыз</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-share-alt"></i>
+                            <h3>Оңай бөлісу</h3>
+                            <p>Оқушылармен тапсырмалармен бөлісіңіз</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h3>Барлық құрылғыларда</h3>
+                            <p>Компьютерде, планшетте немесе телефонда жұмыс істейді</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="activity-types">
+                    <h2>Тапсырма шаблондары</h2>
+                    <div class="activity-cards">
+                        <div class="activity-card">
+                            <div class="card-icon quiz-icon">
+                                <i class="fas fa-question-circle"></i>
+                            </div>
+                            <h3>Викторина</h3>
+                            <p>Жедел кері байланысы бар көп таңдауды сұрақтар жасаңыз</p>
+                            <ul class="activity-features">
+                                <li><i class="fas fa-check"></i> Көп таңдауды сұрақтар</li>
+                                <li><i class="fas fa-check"></i> Жауаптарды автоматты тексеру</li>
+                                <li><i class="fas fa-check"></i> Жедел кері байланыс</li>
+                                <li><i class="fas fa-check"></i> Ұпай санау</li>
+                            </ul>
+                            <button class="secondary-btn activity-btn" data-type="quiz">Викторина жасау</button>
+                        </div>
+                        <div class="activity-card">
+                            <div class="card-icon match-icon">
+                                <i class="fas fa-object-group"></i>
+                            </div>
+                            <h3>Сәйкестендіру</h3>
+                            <p>Байланысты терминдер мен анықтамаларды сүйреп апарып тастау арқылы жұптастырыңыз</p>
+                            <ul class="activity-features">
+                                <li><i class="fas fa-check"></i> Сәйкестендіру жұптары</li>
+                                <li><i class="fas fa-check"></i> Интерактивті жұптастыру</li>
+                                <li><i class="fas fa-check"></i> Түсті кодтау</li>
+                                <li><i class="fas fa-check"></i> Кері байланыс пен прогресс</li>
+                            </ul>
+                            <button class="secondary-btn activity-btn" data-type="match">Сәйкестендіру жасау</button>
+                        </div>
+                        <div class="activity-card">
+                            <div class="card-icon wordsearch-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <h3>Сұрақ-жауап</h3>
+                            <p>Сұрақтар жасаңыз және нақты жауаптарды тексеріңіз</p>
+                            <ul class="activity-features">
+                                <li><i class="fas fa-check"></i> Жазбаша жауаптар</li>
+                                <li><i class="fas fa-check"></i> Дұрыс жауаптарды көрсету</li>
+                                <li><i class="fas fa-check"></i> Жеке кері байланыс</li>
+                                <li><i class="fas fa-check"></i> Нәтижелер туралы есеп</li>
+                            </ul>
+                            <button class="secondary-btn activity-btn" data-type="wordsearch">Сұрақ-жауап жасау</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="how-it-works">
+                    <h2>Қалай жұмыс істейді</h2>
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <h3>Тапсырма түрін таңдаңыз</h3>
+                            <p>Үш түрлі тапсырманың бірін таңдаңыз: Викторина, Сәйкестендіру немесе Сұрақ-жауап</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <h3>Мазмұнды қосыңыз</h3>
+                            <p>Сұрақтар, жауаптар, жұптар немесе терминдер қосыңыз</p>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <h3>Сақтаңыз және бөлісіңіз</h3>
+                            <p>Тапсырманы сақтаңыз және оны оқушылармен бөлісіңіз</p>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </section>
+
+            <section id="create-section" class="hidden-section">
+                <div class="creator-header">
+                    <h2>Жаңа тапсырма жасау</h2>
+                    <div class="task-type-selector">
+                        <button class="type-btn active" data-type="quiz">Викторина</button>
+                        <button class="type-btn" data-type="match">Сәйкестендіру</button>
+                        <button class="type-btn" data-type="wordsearch">Сұрақ-жауап</button>
+                    </div>
+                </div>
+                
+                <div class="task-creator active" id="quiz-creator">
+                    <div class="task-metadata">
+                        <input type="text" id="quiz-title" placeholder="Викторина тақырыбын енгізіңіз...">
+                        <textarea id="quiz-description" placeholder="Сипаттама енгізіңіз..."></textarea>
+                    </div>
+                    <div class="quiz-questions" id="quiz-questions">
+                    </div>
+                    <button id="add-question-btn" class="secondary-btn"><i class="fas fa-plus"></i> Сұрақ қосу</button>
+                    <button id="save-quiz-btn" class="primary-btn">Викторинаны сақтау</button>
+                </div>
+                
+                <div class="task-creator hidden" id="match-creator">
+                    <div class="task-metadata">
+                        <input type="text" id="match-title" placeholder="Сәйкестендіру тақырыбын енгізіңіз...">
+                        <textarea id="match-description" placeholder="Сипаттама енгізіңіз..."></textarea>
+                    </div>
+                    <div class="match-pairs" id="match-pairs">
+                    </div>
+                    <button id="add-pair-btn" class="secondary-btn"><i class="fas fa-plus"></i> Жұп қосу</button>
+                    <button id="save-match-btn" class="primary-btn">Сәйкестендіруді сақтау</button>
+                </div>
+                
+                <div class="task-creator hidden" id="wordsearch-creator">
+                    <div class="task-metadata">
+                        <input type="text" id="wordsearch-title" placeholder="Сұрақ-жауап тақырыбын енгізіңіз...">
+                        <textarea id="wordsearch-description" placeholder="Сипаттама енгізіңіз..."></textarea>
+                    </div>
+                    <div class="wordsearch-words" id="wordsearch-words">
+                    </div>
+                    <button id="add-word-btn" class="secondary-btn"><i class="fas fa-plus"></i> Сұрақ қосу</button>
+
+                    <button id="save-wordsearch-btn" class="primary-btn">Сұрақ-жауапты сақтау</button>
+                </div>
+            </section>
+
+            <section id="tasks-section" class="hidden-section">
+                <h2>Менің тапсырмаларым</h2>
+                <div class="task-list" id="task-list">
+                    <p class="empty-message">Әлі тапсырмалар жасалмаған.</p>
+                </div>
+            </section>
+
+            <section id="preview-section" class="hidden-section">
+                <div class="preview-header">
+                    <button id="back-to-tasks-btn" class="secondary-btn"><i class="fas fa-arrow-left"></i> Артқа</button>
+                    <h2 id="preview-title">Тапсырма алдын-ала көрінісі</h2>
+                </div>
+                <div class="preview-container" id="preview-container">
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Тапсыр оқыту платформасы</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
