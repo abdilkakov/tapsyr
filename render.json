@@ -1,0 +1,10 @@
+{
+  "name": "tapsyr",
+  "env": "node",
+  "region": "frankfurt",
+  "plan": "free",
+  "buildCommand": "cd server && npm install",
+  "startCommand": "cd server && node server.js",
+  "healthCheckPath": "/",
+  "autoDeploy": true
+}

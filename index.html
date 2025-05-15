@@ -9,7 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="json-export-styles.css">
     <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3763/3763365.png" type="image/png">
+    
+    <!-- Никаких внешних зависимостей - всё работает локально -->
 </head>
 <body>
     <div class="app-container">
@@ -188,6 +191,47 @@
                 <div class="preview-header">
                     <button id="back-to-tasks-btn" class="secondary-btn"><i class="fas fa-arrow-left"></i> Артқа</button>
                     <h2 id="preview-title">Тапсырма алдын-ала көрінісі</h2>
+                    <div class="share-buttons" id="share-buttons">
+                        <button id="share-task-btn" class="primary-btn" title="Тапсырмамен бөлісу">
+                            <i class="fas fa-share-alt"></i> Бөлісу
+                        </button>
+                        <div class="action-buttons">
+                            <button id="export-json-btn" class="secondary-btn" title="Экспорт задания в JSON">
+                                <i class="fas fa-file-export"></i> Экспорт
+                            </button>
+                            <button id="import-json-btn" class="secondary-btn" title="Импорт задания из JSON">
+                                <i class="fas fa-file-import"></i> Импорт
+                            </button>
+                        </div>
+                        <div class="share-overlay hidden" id="share-overlay">
+                            <div class="share-dialog">
+                                <div class="share-header">
+                                    <h3>Тапсырмамен бөлісу</h3>
+                                    <button id="close-share-btn"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="share-content">
+                                    <input type="text" id="share-url" readonly>
+                                    <button id="copy-link-btn" title="Көшіру"><i class="fas fa-copy"></i></button>
+                                </div>
+                                <p class="share-info">Бұл сілтемені бөлісу арқылы басқалар тапсырманы көре алады</p>
+                            </div>
+                        </div>
+                        <div class="share-overlay hidden" id="import-overlay">
+                            <div class="share-dialog">
+                                <div class="share-header">
+                                    <h3>Импорт задания из JSON</h3>
+                                    <button id="close-import-btn"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="import-content">
+                                    <p>Выберите JSON-файл с заданием Tapsyr:</p>
+                                    <input type="file" id="json-file-input" accept=".json,application/json">
+                                    <div class="import-buttons">
+                                        <button id="import-file-btn" class="primary-btn">Импортировать</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="preview-container" id="preview-container">
                 </div>
@@ -200,5 +244,6 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="simple-sharing.js"></script>
 </body>
 </html>

@@ -28,8 +28,17 @@ const wordsearchGrid = document.getElementById('wordsearch-grid');
 const taskList = document.getElementById('task-list');
 const previewContainer = document.getElementById('preview-container');
 const previewTitle = document.getElementById('preview-title');
+const shareTaskBtn = document.getElementById('share-task-btn');
+const shareOverlay = document.getElementById('share-overlay');
+const shareUrl = document.getElementById('share-url');
+const copyLinkBtn = document.getElementById('copy-link-btn');
+const closeShareBtn = document.getElementById('close-share-btn');
 
 let tasks = JSON.parse(localStorage.getItem('tapsyr-tasks')) || [];
+let currentTask = null;
+
+// Базовый URL для сохранения задания (Firebase Storage)
+const SERVER_URL = 'https://firebasestorage.googleapis.com/v0/b/tapsyr-8e54a.appspot.com/o/';
 
 function showSection(section) {
     welcomeSection.classList.remove('active-section');
@@ -463,6 +472,7 @@ function renderTaskList() {
 }
 
 function previewTask(task) {
+    currentTask = task;
     previewTitle.textContent = task.title;
     
     if (task.type === 'quiz') {
@@ -471,6 +481,60 @@ function previewTask(task) {
         previewMatch(task);
     } else if (task.type === 'wordsearch') {
         previewWordsearch(task);
+    }
+    
+    // Добавим обработчик для кнопки "Бөлісу" здесь, чтобы гарантировать его активацию
+    if (shareTaskBtn) {
+        shareTaskBtn.onclick = async function() {
+            console.log('Кнопка Бөлісу нажата, текущее задание:', currentTask);
+            if (currentTask) {
+                try {
+                    // Прямой вызов к API-клиенту, минуя промежуточные функции
+                    const result = await saveTaskToDatabase(currentTask);
+                    console.log('Результат сохранения:', result);
+                    
+                    if (result.success) {
+                        shareUrl.value = result.shareUrl;
+                        shareOverlay.classList.remove('hidden');
+                        console.log('Показываем оверлей с URL:', result.shareUrl);
+                    } else {
+                        console.error('Не удалось создать ссылку:', result.error);
+                        alert('Не удалось создать ссылку: ' + result.error);
+                    }
+                } catch (error) {
+                    console.error("Ошибка при шаринге:", error);
+                    alert('Ошибка: ' + error.message);
+                }
+            } else {
+                alert('Нет активного задания для шаринга');
+            }
+        };
+    }
+    
+    // Также инициализируем другие кнопки шаринга
+    if (copyLinkBtn) {
+        copyLinkBtn.onclick = function() {
+            shareUrl.select();
+            document.execCommand('copy');
+            copyLinkBtn.innerHTML = '<i class="fas fa-check"></i>';
+            setTimeout(() => {
+                copyLinkBtn.innerHTML = '<i class="fas fa-copy"></i>';
+            }, 2000);
+        };
+    }
+    
+    if (closeShareBtn) {
+        closeShareBtn.onclick = function() {
+            shareOverlay.classList.add('hidden');
+        };
+    }
+    
+    if (shareOverlay) {
+        shareOverlay.onclick = function(e) {
+            if (e.target === shareOverlay) {
+                shareOverlay.classList.add('hidden');
+            }
+        };
     }
     
     showSection(previewSection);
@@ -931,13 +995,16 @@ function initializeTaskCreators() {
     }
 }
 
-// Initialize with some default questions/pairs
+// Инициализация с некоторыми стандартными вопросами/парами
 addQuestion();
 addPair();
 addWord();
 
-// Initial render of task list
+// Начальная визуализация списка заданий
 renderTaskList();
 
-// Initialize task creators
+// Инициализация создателей задач
 initializeTaskCreators();
+
+// Проверяем URL для загрузки шаренного задания
+checkForSharedTask();
