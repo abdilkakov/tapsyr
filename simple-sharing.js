@@ -28,7 +28,27 @@ function saveAndShare(task) {
     navigator.clipboard.writeText(shareUrl)
         .then(() => {
             console.log('Ссылка скопирована в буфер обмена');
-            alert('Ссылка скопирована в буфер обмена! Теперь вы можете отправить её кому угодно, и задание откроется у них в браузере.');
+            
+            // Показываем визуальное подтверждение копирования без alert
+            const shareBtn = document.getElementById('share-task-btn');
+            if (shareBtn) {
+                const originalText = shareBtn.innerHTML;
+                shareBtn.innerHTML = '<i class="fas fa-check"></i> Скопировано';
+                
+                // Возвращаем оригинальный текст через 2 секунды
+                setTimeout(() => {
+                    shareBtn.innerHTML = originalText;
+                }, 2000);
+            }
+            
+            // Показываем ссылку в оверлее без alert
+            const shareOverlay = document.getElementById('share-overlay');
+            const shareUrlInput = document.getElementById('share-url');
+            
+            if (shareOverlay && shareUrlInput) {
+                shareUrlInput.value = shareUrl;
+                shareOverlay.classList.remove('hidden');
+            }
         })
         .catch(err => {
             console.error('Не удалось скопировать ссылку:', err);
@@ -41,7 +61,14 @@ function saveAndShare(task) {
             document.execCommand('copy');
             document.body.removeChild(linkElement);
             
-            alert('Ссылка создана! Скопируйте её и отправьте кому угодно, и задание откроется у них в браузере.');
+            // Показываем ссылку в оверлее без alert
+            const shareOverlay = document.getElementById('share-overlay');
+            const shareUrlInput = document.getElementById('share-url');
+            
+            if (shareOverlay && shareUrlInput) {
+                shareUrlInput.value = shareUrl;
+                shareOverlay.classList.remove('hidden');
+            }
         });
     
     return {
@@ -78,16 +105,42 @@ function checkForSharedTask() {
             const existingTaskIndex = tasks.findIndex(t => t.id === task.id);
             
             if (existingTaskIndex === -1) {
+                // Добавляем в список моих заданий
                 tasks.push(task);
                 localStorage.setItem('tapsyr-tasks', JSON.stringify(tasks));
+                console.log('Задание добавлено в список моих заданий');
+            } else {
+                // Обновляем существующее задание
+                tasks[existingTaskIndex] = task;
+                localStorage.setItem('tapsyr-tasks', JSON.stringify(tasks));
+                console.log('Существующее задание обновлено');
             }
+            
+            // Показываем уведомление о сохранении задания
+            const notification = document.createElement('div');
+            notification.className = 'task-notification';
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-check-circle"></i>
+                    <p>Тапсырма "${task.title}" сіздің құрылғыңызда сақталды</p>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            // Скрываем уведомление через 4 секунды
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 4000);
             
             // Открываем предпросмотр
             if (typeof window.previewTask === 'function') {
                 window.previewTask(task);
             } else {
                 console.error('Функция previewTask не найдена');
-                alert('Не удалось открыть задание: функция предпросмотра не найдена. Но задание было сохранено на вашем устройстве.');
+                alert('Тапсырма сіздің құрылғыңызда сақталды! Оны "Менің тапсырмаларым" бөлімінен таба аласыз.');
             }
         } catch (error) {
             console.error('Ошибка при обработке данных задания из URL:', error);
@@ -112,6 +165,39 @@ document.addEventListener('DOMContentLoaded', function() {
             } else {
                 alert('Нет активного задания для шаринга');
             }
+        });
+    }
+    
+    // Добавляем обработчик для закрытия диалога шаринга
+    const closeShareBtn = document.getElementById('close-share-btn');
+    const shareOverlay = document.getElementById('share-overlay');
+    
+    if (closeShareBtn && shareOverlay) {
+        closeShareBtn.addEventListener('click', function() {
+            shareOverlay.classList.add('hidden');
+        });
+        
+        // Закрываем при клике вне диалога
+        shareOverlay.addEventListener('click', function(e) {
+            if (e.target === shareOverlay) {
+                shareOverlay.classList.add('hidden');
+            }
+        });
+    }
+    
+    // Настраиваем кнопку копирования в диалоге
+    const copyLinkBtn = document.getElementById('copy-link-btn');
+    const shareUrl = document.getElementById('share-url');
+    
+    if (copyLinkBtn && shareUrl) {
+        copyLinkBtn.addEventListener('click', function() {
+            shareUrl.select();
+            document.execCommand('copy');
+            
+            copyLinkBtn.innerHTML = '<i class="fas fa-check"></i>';
+            setTimeout(() => {
+                copyLinkBtn.innerHTML = '<i class="fas fa-copy"></i>';
+            }, 2000);
         });
     }
 });

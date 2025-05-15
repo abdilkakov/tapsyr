@@ -1,0 +1,43 @@
+/* Стили для всплывающего уведомления о сохранении задания */
+.task-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    max-width: 350px;
+    z-index: 10000;
+    animation: slide-in 0.5s ease forwards;
+    transition: opacity 0.5s ease;
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.notification-content i {
+    font-size: 24px;
+    color: #43aa8b; /* Цвет успеха из основной темы */
+}
+
+.notification-content p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #2b2d42; /* Основной цвет текста из темы */
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
