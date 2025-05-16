@@ -34,7 +34,39 @@ const shareUrl = document.getElementById('share-url');
 const copyLinkBtn = document.getElementById('copy-link-btn');
 const closeShareBtn = document.getElementById('close-share-btn');
 
-let tasks = JSON.parse(localStorage.getItem('tapsyr-tasks')) || [];
+// Предопределенные статические задания
+const staticTasks = [
+    {
+        id: 1234,
+        type: 'quiz',
+        title: 'Информатика - Викторина',
+        description: 'Информатика бойынша 10 сұрақтан тұратын викторина',
+        staticUrl: './tasks/1234-new.html',
+        date: new Date('2025-05-01').toISOString(),
+        isStatic: true
+    },
+    {
+        id: 4256,
+        type: 'match',
+        title: 'Информатика - Сәйкестендіру',
+        description: 'Информатика терминдерін анықтамаларымен сәйкестендіру',
+        staticUrl: './tasks/4256-new.html',
+        date: new Date('2025-05-02').toISOString(),
+        isStatic: true
+    },
+    {
+        id: 7654,
+        type: 'wordsearch',
+        title: 'Информатика - Сұрақ-жауап',
+        description: 'Информатика бойынша 10 сұрақ-жауап тапсырмасы',
+        staticUrl: './tasks/7654-new.html',
+        date: new Date('2025-05-03').toISOString(),
+        isStatic: true
+    }
+];
+
+// Объединяем статические и динамические задания
+let tasks = [...staticTasks, ...(JSON.parse(localStorage.getItem('tapsyr-tasks')) || [])];
 let currentTask = null;
 
 // Базовый URL для сохранения задания (Firebase Storage)
@@ -433,7 +465,9 @@ function resetWordsearchCreator() {
 
 // Task Management Functions
 function saveTasksToLocalStorage() {
-    localStorage.setItem('tapsyr-tasks', JSON.stringify(tasks));
+    // Сохраняем только динамические задания (не статические)
+    const dynamicTasks = tasks.filter(task => !task.isStatic);
+    localStorage.setItem('tapsyr-tasks', JSON.stringify(dynamicTasks));
 }
 
 function renderTaskList() {
@@ -444,13 +478,23 @@ function renderTaskList() {
     
     taskList.innerHTML = '';
     
-    tasks.forEach(task => {
+    // Сортируем задания: статические в начале, затем по дате (новые сверху)
+    const sortedTasks = [...tasks].sort((a, b) => {
+        // Сначала статические задания
+        if (a.isStatic && !b.isStatic) return -1;
+        if (!a.isStatic && b.isStatic) return 1;
+        // Затем по дате (новые сверху)
+        return new Date(b.date) - new Date(a.date);
+    });
+    
+    sortedTasks.forEach(task => {
         const date = new Date(task.date).toLocaleDateString();
+        
         const taskHTML = `
             <div class="task-card" data-id="${task.id}">
-                <span class="task-type type-${task.type}">${task.type === 'quiz' ? 'Викторина' : task.type === 'match' ? 'Сәйкестендіру' : 'Сөзді іздеу'}</span>
-                <h3>${task.title}</h3>
-                <p>${task.description.substring(0, 60)}${task.description.length > 60 ? '...' : ''}</p>
+                <span class="task-type type-${task.type}">${task.type === 'quiz' ? 'Викторина' : task.type === 'match' ? 'Сәйкестендіру' : 'Сұрақ-жауап'}</span>
+                <h3 class="task-title">${task.title}</h3>
+                <p class="task-desc">${task.description}</p>
                 <p class="task-date">Жасалған күні: ${date}</p>
             </div>
         `;
@@ -461,11 +505,17 @@ function renderTaskList() {
     // Add event listeners to task cards
     const taskCards = taskList.querySelectorAll('.task-card');
     taskCards.forEach(card => {
-        card.addEventListener('click', () => {
+        card.addEventListener('click', function() {
             const taskId = parseInt(card.getAttribute('data-id'));
             const task = tasks.find(t => t.id === taskId);
             if (task) {
-                previewTask(task);
+                if (task.isStatic) {
+                    // Для статических заданий открываем напрямую их HTML файл
+                    window.open(task.staticUrl, '_blank');
+                } else {
+                    // Для динамических заданий используем превью
+                    previewTask(task);
+                }
             }
         });
     });

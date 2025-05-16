@@ -155,6 +155,23 @@
             font-size: 1.2rem;
         }
         
+        .share-desc {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+        
+        .share-link-container {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .share-info {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        
         .share-content {
             display: flex;
             margin-bottom: 1rem;
@@ -340,8 +357,7 @@
                 <h1>Tapsyr</h1>
             </div>
             <div class="task-info">
-                <span class="task-id">ID: 4256</span>
-                <button class="share-btn" id="share-btn">
+                <button class="primary-btn" id="share-btn">
                     <i class="fas fa-share-alt"></i> Бөлісу
                 </button>
             </div>
@@ -440,21 +456,23 @@
         </footer>
     </div>
     
-    <!-- Диалог шаринга -->
+    <!-- Диалог для шаринга -->
     <div class="share-overlay hidden" id="share-overlay">
         <div class="share-dialog">
             <div class="share-header">
-                <h3>Тапсырмамен бөлісу</h3>
-                <button id="close-share-btn"><i class="fas fa-times"></i></button>
+                <h3>Тапсырманы бөлісу</h3>
+                <button class="close-btn" id="close-share-btn"><i class="fas fa-times"></i></button>
             </div>
             <div class="share-content">
-                <input type="text" id="share-url" readonly>
-                <button id="copy-link-btn" title="Көшіру"><i class="fas fa-copy"></i></button>
+                <p class="share-desc">Төмендегі сілтемені көшіріп, әріптестеріңізбен бөлісіңіз:</p>
+                <div class="share-link-container">
+                    <input type="text" id="share-url" readonly>
+                    <button id="copy-link-btn" title="Көшіру"><i class="fas fa-copy"></i></button>
+                </div>
+                <p class="share-info">Бұл сілтемені бөлісу арқылы басқалар тапсырманы көре алады</p>
             </div>
-            <p class="share-info">Бұл сілтемені бөлісу арқылы басқалар тапсырманы көре алады</p>
         </div>
     </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const matchItems = document.querySelectorAll('.match-item');

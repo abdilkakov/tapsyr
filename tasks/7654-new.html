@@ -79,6 +79,7 @@
         .task-info {
             display: flex;
             align-items: center;
+            gap: 10px;
         }
 
         .task-id {
@@ -89,35 +90,140 @@
             font-weight: 500;
             font-size: 0.85rem;
         }
+        
+        .share-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+        
+        .share-btn:hover {
+            background-color: #d01a6e;
+            transform: translateY(-2px);
+        }
+        
+        .share-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .share-dialog {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .share-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .share-header h3 {
+            color: var(--primary-color);
+            margin: 0;
+        }
+        
+        .share-header button {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .share-desc {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+        
+        .share-link-container {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .share-info {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        
+        .share-content {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .share-content input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ced4da;
+            border-radius: 8px 0 0 8px;
+            font-size: 0.9rem;
+        }
+        
+        .share-content button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 1rem;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+        }
+        
+        .share-info {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-align: center;
+        }
 
         main {
             flex: 1;
             padding: 2rem;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .task-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--card-color);
+            background-color: var(--card-color);
             border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
             padding: 2rem;
+            box-shadow: var(--shadow);
         }
 
         .task-header {
-            text-align: center;
             margin-bottom: 2rem;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 1rem;
+            text-align: center;
         }
 
         .task-header h2 {
-            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
             color: var(--primary-color);
-        }
-
-        .task-header p {
-            color: var(--text-light);
+            margin-bottom: 0.5rem;
         }
 
         .wordsearch-container {
@@ -271,7 +377,9 @@
                 <h1>Tapsyr</h1>
             </div>
             <div class="task-info">
-                <span class="task-id">ID: 7654</span>
+                <button class="primary-btn" id="share-btn">
+                    <i class="fas fa-share-alt"></i> Бөлісу
+                </button>
             </div>
         </header>
 
@@ -408,11 +516,70 @@
             <p>&copy; 2025 Тапсыр оқыту платформасы</p>
         </footer>
     </div>
+    
+    <!-- Диалог для шаринга -->
+    <div class="share-overlay hidden" id="share-overlay">
+        <div class="share-dialog">
+            <div class="share-header">
+                <h3>Тапсырманы бөлісу</h3>
+                <button class="close-btn" id="close-share-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="share-content">
+                <p class="share-desc">Төмендегі сілтемені көшіріп, әріптестеріңізбен бөлісіңіз:</p>
+                <div class="share-link-container">
+                    <input type="text" id="share-url" readonly>
+                    <button id="copy-link-btn" title="Көшіру"><i class="fas fa-copy"></i></button>
+                </div>
+                <p class="share-info">Бұл сілтемені бөлісу арқылы басқалар тапсырманы көре алады</p>
+            </div>
+        </div>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Настраиваем кнопку шаринга
+            const shareBtn = document.getElementById('share-btn');
+            const shareOverlay = document.getElementById('share-overlay');
+            const closeShareBtn = document.getElementById('close-share-btn');
+            const shareUrl = document.getElementById('share-url');
+            const copyLinkBtn = document.getElementById('copy-link-btn');
             const checkBtn = document.getElementById('check-wordsearch-btn');
             
+            // Настраиваем кнопку шаринга
+            if (shareBtn && shareOverlay && closeShareBtn && shareUrl && copyLinkBtn) {
+                // Обработчик для кнопки шаринга
+                shareBtn.addEventListener('click', function() {
+                    shareUrl.value = window.location.href;
+                    shareOverlay.classList.remove('hidden');
+                });
+                
+                // Обработчик для закрытия диалога
+                closeShareBtn.addEventListener('click', function() {
+                    shareOverlay.classList.add('hidden');
+                });
+                
+                // Обработчик для клика вне диалога
+                shareOverlay.addEventListener('click', function(e) {
+                    if (e.target === shareOverlay) {
+                        shareOverlay.classList.add('hidden');
+                    }
+                });
+                
+                // Обработчик для кнопки копирования
+                copyLinkBtn.addEventListener('click', function() {
+                    shareUrl.select();
+                    document.execCommand('copy');
+                    
+                    // Показываем подтверждение
+                    const originalIcon = copyLinkBtn.innerHTML;
+                    copyLinkBtn.innerHTML = '<i class="fas fa-check"></i>';
+                    setTimeout(function() {
+                        copyLinkBtn.innerHTML = originalIcon;
+                    }, 2000);
+                });
+            }
+            
+            // Настраиваем кнопку проверки ответов
             if (checkBtn) {
                 checkBtn.addEventListener('click', function() {
                     // Правильные ответы (разные варианты)

@@ -1360,6 +1360,71 @@ footer {
     margin-top: auto;
 }
 
+/* Стили для раздела "Мои задания" */
+.task-card {
+    background-color: var(--card-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 1.2rem;
+    transition: var(--transition);
+    cursor: pointer;
+    border: 1px solid rgba(67, 97, 238, 0.08);
+    position: relative;
+}
+
+.task-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(88, 96, 199, 0.1);
+}
+
+.task-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+    color: var(--primary-color);
+}
+
+.task-desc {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.task-date {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    opacity: 0.8;
+}
+
+.task-type {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.type-quiz {
+    background-color: rgba(67, 97, 238, 0.1);
+    color: var(--primary-color);
+}
+
+.type-match {
+    background-color: rgba(76, 201, 240, 0.1);
+    color: var(--accent-color);
+}
+
+.type-wordsearch {
+    background-color: rgba(247, 37, 133, 0.1);
+    color: var(--secondary-color);
+}
+
+/* Стили для кнопки удалены */
+
 /* Responsive Design */
 @media (max-width: 768px) {
     header {
@@ -1398,6 +1463,8 @@ footer {
         width: 35px;
         height: 35px;
     }
+    
+    /* Стили для кнопки удалены */
 }
 
 /* Стили для предпросмотра и шаринга заданий */

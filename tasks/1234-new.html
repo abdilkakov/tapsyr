@@ -160,6 +160,25 @@
             margin-bottom: 1rem;
         }
         
+        .share-desc {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+        
+        .share-link-container {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .share-link-container input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ced4da;
+            border-radius: 8px 0 0 8px;
+            font-size: 0.9rem;
+        }
+        
         .share-content input {
             flex: 1;
             padding: 0.8rem;
@@ -378,8 +397,7 @@
                 <h1>Tapsyr</h1>
             </div>
             <div class="task-info">
-                <span class="task-id">ID: 1234</span>
-                <button class="share-btn" id="share-btn">
+                <button class="primary-btn" id="share-btn">
                     <i class="fas fa-share-alt"></i> Бөлісу
                 </button>
             </div>
@@ -663,24 +681,22 @@
                 </div>
             </div>
         </main>
-
-        <footer>
-            <p>&copy; 2025 Тапсыр оқыту платформасы</p>
-        </footer>
-    </div>
     
-    <!-- Диалог шаринга -->
+    <!-- Диалог для шаринга -->
     <div class="share-overlay hidden" id="share-overlay">
         <div class="share-dialog">
             <div class="share-header">
-                <h3>Тапсырмамен бөлісу</h3>
-                <button id="close-share-btn"><i class="fas fa-times"></i></button>
+                <h3>Тапсырманы бөлісу</h3>
+                <button class="close-btn" id="close-share-btn"><i class="fas fa-times"></i></button>
             </div>
             <div class="share-content">
-                <input type="text" id="share-url" readonly>
-                <button id="copy-link-btn" title="Көшіру"><i class="fas fa-copy"></i></button>
+                <p class="share-desc">Төмендегі сілтемені көшіріп, әріптестеріңізбен бөлісіңіз:</p>
+                <div class="share-link-container">
+                    <input type="text" id="share-url" readonly>
+                    <button id="copy-link-btn" title="Көшіру"><i class="fas fa-copy"></i></button>
+                </div>
+                <p class="share-info">Бұл сілтемені бөлісу арқылы басқалар тапсырманы көре алады</p>
             </div>
-            <p class="share-info">Бұл сілтемені бөлісу арқылы басқалар тапсырманы көре алады</p>
         </div>
     </div>
 
