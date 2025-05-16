@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информатика викторинасы | Tapsyr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3763/3763365.png" type="image/png">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --primary-light: #7289da;
+            --primary-dark: #3a0ca3;
+            --secondary-color: #f72585;
+            --accent-color: #4cc9f0;
+            --success-color: #43aa8b;
+            --background-color: #f8f9ff;
+            --card-color: #ffffff;
+            --text-color: #2b2d42;
+            --text-light: #6c757d;
+            --border-radius: 12px;
+            --shadow: 0 8px 30px rgba(0,0,0,0.05);
+            --shadow-hover: 0 15px 60px rgba(0,0,0,0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: var(--card-color);
+            box-shadow: var(--shadow);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-right: 0.5rem;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .task-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .task-id {
+            background-color: var(--primary-light);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        
+        .share-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+        
+        .share-btn:hover {
+            background-color: #d01a6e;
+            transform: translateY(-2px);
+        }
+        
+        .share-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .share-dialog {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .share-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .share-header h3 {
+            color: var(--primary-color);
+            margin: 0;
+        }
+        
+        .share-header button {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .share-content {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .share-content input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ced4da;
+            border-radius: 8px 0 0 8px;
+            font-size: 0.9rem;
+        }
+        
+        .share-content button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 1rem;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+        }
+        
+        .share-info {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .task-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+        }
+
+        .task-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+
+        .task-header h2 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .task-header p {
+            color: var(--text-light);
+        }
+
+        .quiz-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .quiz-question {
+            background: var(--background-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .quiz-question:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .question-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .question-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            margin-right: 1rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .question-header h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-left: 2.5rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .option:hover {
+            background: #f0f4ff;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 1rem;
+            accent-color: var(--primary-color);
+            width: 18px;
+            height: 18px;
+        }
+
+        .option label {
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .feedback {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .feedback.correct {
+            background-color: rgba(67, 170, 139, 0.15);
+            color: var(--success-color);
+        }
+
+        .feedback.incorrect {
+            background-color: rgba(247, 37, 133, 0.15);
+            color: var(--secondary-color);
+        }
+
+        .quiz-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        .quiz-results {
+            margin-top: 1.5rem;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .quiz-results h3 {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .results-info {
+            background: var(--background-color);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .results-info p {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        footer {
+            background-color: var(--card-color);
+            padding: 1.5rem;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.03);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-puzzle-piece"></i>
+                <h1>Tapsyr</h1>
+            </div>
+            <div class="task-info">
+                <span class="task-id">ID: 1234</span>
+                <button class="share-btn" id="share-btn">
+                    <i class="fas fa-share-alt"></i> Бөлісу
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <div class="task-container">
+                <div class="task-header">
+                    <h2>Информатика викторинасы</h2>
+                    <p>Информатика бойынша базалық білімдерді тексеруге арналған викторина</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question" data-question-index="0">
+                        <div class="question-header">
+                            <span class="question-number">1</span>
+                            <h3>1 байт неше бит?</h3>
+                        </div>
+                        <div class="options-container">
+                            <div class="option">
+                                <input type="radio" id="q0_o0" name="q0" value="0">
+                                <label for="q0_o0">4 бит</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q0_o1" name="q0" value="1">
+                                <label for="q0_o1">8 бит</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q0_o2" name="q0" value="2">
+                                <label for="q0_o2">16 бит</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q0_o3" name="q0" value="3">
+                                <label for="q0_o3">32 бит</label>
+                            </div>
+                        </div>
+                        <div class="feedback hidden"></div>
+                    </div>
+
+                    <div class="quiz-question" data-question-index="1">
+                        <div class="question-header">
+                            <span class="question-number">2</span>
+                            <h3>HTML тегтері қандай символдармен белгіленеді?</h3>
+                        </div>
+                        <div class="options-container">
+                            <div class="option">
+                                <input type="radio" id="q1_o0" name="q1" value="0">
+                                <label for="q1_o0">&lt; және &gt;</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q1_o1" name="q1" value="1">
+                                <label for="q1_o1">[ және ]</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q1_o2" name="q1" value="2">
+                                <label for="q1_o2">{ және }</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q1_o3" name="q1" value="3">
+                                <label for="q1_o3">( және )</label>
+                            </div>
+                        </div>
+                        <div class="feedback hidden"></div>
+                    </div>
+
+                    <div class="quiz-question" data-question-index="2">
+                        <div class="question-header">
+                            <span class="question-number">3</span>
+                            <h3>Қай бағдарламалау тілі веб-сайттардың интерактивтілігін жақсарту үшін қолданылады?</h3>
+                        </div>
+                        <div class="options-container">
+                            <div class="option">
+                                <input type="radio" id="q2_o0" name="q2" value="0">
+                                <label for="q2_o0">C++</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q2_o1" name="q2" value="1">
+                                <label for="q2_o1">JavaScript</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q2_o2" name="q2" value="2">
+                                <label for="q2_o2">Ruby</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q2_o3" name="q2" value="3">
+                                <label for="q2_o3">Pascal</label>
+                            </div>
+                        </div>
+                        <div class="feedback hidden"></div>
+                    </div>
+
+                    <div class="quiz-question" data-question-index="3">
+                        <div class="question-header">
+                            <span class="question-number">4</span>
+                            <h3>IP-адрестің әдеттегі форматы қандай?</h3>
+                        </div>
+                        <div class="options-container">
+                            <div class="option">
+                                <input type="radio" id="q3_o0" name="q3" value="0">
+                                <label for="q3_o0">000.000.000.000</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q3_o1" name="q3" value="1">
+                                <label for="q3_o1">xxx.xxx.xxx.xxx</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q3_o2" name="q3" value="2">
+                                <label for="q3_o2">AAA.BBB.CCC.DDD</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q3_o3" name="q3" value="3">
+                                <label for="q3_o3">www.xxx.yyy.zzz</label>
+                            </div>
+                        </div>
+                        <div class="feedback hidden"></div>
+                    </div>
+
+                    <div class="quiz-question" data-question-index="4">
+                        <div class="question-header">
+                            <span class="question-number">5</span>
+                            <h3>Төмендегілердің қайсысы операциялық жүйе болып табылмайды?</h3>
+                        </div>
+                        <div class="options-container">
+                            <div class="option">
+                                <input type="radio" id="q4_o0" name="q4" value="0">
+                                <label for="q4_o0">Windows</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q4_o1" name="q4" value="1">
+                                <label for="q4_o1">Microsoft Office</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q4_o2" name="q4" value="2">
+                                <label for="q4_o2">Linux</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q4_o3" name="q4" value="3">
+                                <label for="q4_o3">macOS</label>
+                            </div>
+                        </div>
+                        <div class="feedback hidden"></div>
+                    </div>
+
+                    <div class="quiz-question" data-question-index="5">
+                        <div class="question-header">
+                            <span class="question-number">6</span>
+                            <h3>1 гигабайт (ГБ) неше мегабайт (МБ)?</h3>
+                        </div>
+                        <div class="options-container">
+                            <div class="option">
+                                <input type="radio" id="q5_o0" name="q5" value="0">
+                                <label for="q5_o0">100 МБ</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q5_o1" name="q5" value="1">
+                                <label for="q5_o1">1000 МБ</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q5_o2" name="q5" value="2">
+                                <label for="q5_o2">1024 МБ</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q5_o3" name="q5" value="3">
+                                <label for="q5_o3">10000 МБ</label>
+                            </div>
+                        </div>
+                        <div class="feedback hidden"></div>
+                    </div>
+
+                    <div class="quiz-question" data-question-index="6">
+                        <div class="question-header">
+                            <span class="question-number">7</span>
+                            <h3>Төмендегі қай құрылғы компьютердің жады болып саналады?</h3>
+                        </div>
+                        <div class="options-container">
+                            <div class="option">
+                                <input type="radio" id="q6_o0" name="q6" value="0">
+                                <label for="q6_o0">Монитор</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q6_o1" name="q6" value="1">
+                                <label for="q6_o1">RAM</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q6_o2" name="q6" value="2">
+                                <label for="q6_o2">Пернетақта</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q6_o3" name="q6" value="3">
+                                <label for="q6_o3">Тінтуір</label>
+                            </div>
+                        </div>
+                        <div class="feedback hidden"></div>
+                    </div>
+
+                    <div class="quiz-question" data-question-index="7">
+                        <div class="question-header">
+                            <span class="question-number">8</span>
+                            <h3>www аббревиатурасы нені білдіреді?</h3>
+                        </div>
+                        <div class="options-container">
+                            <div class="option">
+                                <input type="radio" id="q7_o0" name="q7" value="0">
+                                <label for="q7_o0">Web Wide World</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q7_o1" name="q7" value="1">
+                                <label for="q7_o1">World Wide Web</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q7_o2" name="q7" value="2">
+                                <label for="q7_o2">Wide World Web</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q7_o3" name="q7" value="3">
+                                <label for="q7_o3">World Web Wide</label>
+                            </div>
+                        </div>
+                        <div class="feedback hidden"></div>
+                    </div>
+
+                    <div class="quiz-question" data-question-index="8">
+                        <div class="question-header">
+                            <span class="question-number">9</span>
+                            <h3>SQL нені білдіреді?</h3>
+                        </div>
+                        <div class="options-container">
+                            <div class="option">
+                                <input type="radio" id="q8_o0" name="q8" value="0">
+                                <label for="q8_o0">Simple Query Language</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q8_o1" name="q8" value="1">
+                                <label for="q8_o1">Structured Query Language</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q8_o2" name="q8" value="2">
+                                <label for="q8_o2">System Quality Language</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q8_o3" name="q8" value="3">
+                                <label for="q8_o3">Software Quality Language</label>
+                            </div>
+                        </div>
+                        <div class="feedback hidden"></div>
+                    </div>
+
+                    <div class="quiz-question" data-question-index="9">
+                        <div class="question-header">
+                            <span class="question-number">10</span>
+                            <h3>Компьютер вирусы дегеніміз не?</h3>
+                        </div>
+                        <div class="options-container">
+                            <div class="option">
+                                <input type="radio" id="q9_o0" name="q9" value="0">
+                                <label for="q9_o0">Пайдалы бағдарламалық жасақтама</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q9_o1" name="q9" value="1">
+                                <label for="q9_o1">Зиянды бағдарламалық жасақтама</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q9_o2" name="q9" value="2">
+                                <label for="q9_o2">Биологиялық вирус</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q9_o3" name="q9" value="3">
+                                <label for="q9_o3">Компьютердің физикалық бөлшегі</label>
+                            </div>
+                        </div>
+                        <div class="feedback hidden"></div>
+                    </div>
+
+                    <div class="quiz-controls">
+                        <button id="check-answers-btn" class="primary-btn">Жауаптарды тексеру</button>
+                        <div class="quiz-results hidden">
+                            <h3>Нәтижелер</h3>
+                            <div class="results-info"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Тапсыр оқыту платформасы</p>
+        </footer>
+    </div>
+    
+    <!-- Диалог шаринга -->
+    <div class="share-overlay hidden" id="share-overlay">
+        <div class="share-dialog">
+            <div class="share-header">
+                <h3>Тапсырмамен бөлісу</h3>
+                <button id="close-share-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="share-content">
+                <input type="text" id="share-url" readonly>
+                <button id="copy-link-btn" title="Көшіру"><i class="fas fa-copy"></i></button>
+            </div>
+            <p class="share-info">Бұл сілтемені бөлісу арқылы басқалар тапсырманы көре алады</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Настраиваем кнопку шаринга
+            const shareBtn = document.getElementById('share-btn');
+            const shareOverlay = document.getElementById('share-overlay');
+            const closeShareBtn = document.getElementById('close-share-btn');
+            const shareUrl = document.getElementById('share-url');
+            const copyLinkBtn = document.getElementById('copy-link-btn');
+            
+            if (shareBtn && shareOverlay && closeShareBtn && shareUrl && copyLinkBtn) {
+                // Обработчик для кнопки шаринга
+                shareBtn.addEventListener('click', function() {
+                    shareUrl.value = window.location.href;
+                    shareOverlay.classList.remove('hidden');
+                });
+                
+                // Обработчик для закрытия диалога
+                closeShareBtn.addEventListener('click', function() {
+                    shareOverlay.classList.add('hidden');
+                });
+                
+                // Обработчик для клика вне диалога
+                shareOverlay.addEventListener('click', function(e) {
+                    if (e.target === shareOverlay) {
+                        shareOverlay.classList.add('hidden');
+                    }
+                });
+                
+                // Обработчик для кнопки копирования
+                copyLinkBtn.addEventListener('click', function() {
+                    shareUrl.select();
+                    document.execCommand('copy');
+                    
+                    // Показываем подтверждение
+                    const originalIcon = copyLinkBtn.innerHTML;
+                    copyLinkBtn.innerHTML = '<i class="fas fa-check"></i>';
+                    setTimeout(function() {
+                        copyLinkBtn.innerHTML = originalIcon;
+                    }, 2000);
+                });
+            }
+            
+            const checkAnswersBtn = document.getElementById('check-answers-btn');
+            
+            if (checkAnswersBtn) {
+                checkAnswersBtn.addEventListener('click', function() {
+                    // Правильные ответы (индексы)
+                    const correctAnswers = [1, 0, 1, 1, 1, 2, 1, 1, 1, 1];
+                    let correctCount = 0;
+                    
+                    for (let i = 0; i < correctAnswers.length; i++) {
+                        const questionElement = document.querySelector(`.quiz-question[data-question-index="${i}"]`);
+                        const feedbackElement = questionElement.querySelector('.feedback');
+                        const selectedOption = questionElement.querySelector(`input[name="q${i}"]:checked`);
+                        
+                        if (feedbackElement) {
+                            feedbackElement.classList.remove('hidden', 'correct', 'incorrect');
+                            
+                            if (selectedOption) {
+                                const selectedIndex = parseInt(selectedOption.value);
+                                if (selectedIndex === correctAnswers[i]) {
+                                    feedbackElement.textContent = 'Дұрыс!';
+                                    feedbackElement.classList.add('correct');
+                                    correctCount++;
+                                } else {
+                                    const correctOptionText = questionElement.querySelector(`label[for="q${i}_o${correctAnswers[i]}"]`).textContent;
+                                    feedbackElement.textContent = `Дұрыс емес. Дұрыс жауап: ${correctOptionText}`;
+                                    feedbackElement.classList.add('incorrect');
+                                }
+                            } else {
+                                feedbackElement.textContent = 'Жауап таңдалған жоқ.';
+                                feedbackElement.classList.add('incorrect');
+                            }
+                            
+                            feedbackElement.classList.remove('hidden');
+                        }
+                    }
+                    
+                    // Показываем результаты
+                    const resultsElement = document.querySelector('.quiz-results');
+                    const resultsInfoElement = document.querySelector('.results-info');
+                    
+                    if (resultsElement && resultsInfoElement) {
+                        const percentage = Math.round((correctCount / correctAnswers.length) * 100);
+                        resultsInfoElement.innerHTML = `
+                            <p>Дұрыс жауаптар: ${correctCount} / ${correctAnswers.length} (${percentage}%)</p>
+                        `;
+                        
+                        resultsElement.classList.remove('hidden');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

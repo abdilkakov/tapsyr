@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Қазақ тілі - Сұрақ-жауап | Tapsyr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .task-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .task-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        .wordsearch-item {
+            margin-bottom: 25px;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .question-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .question-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: #5e81ac;
+            color: white;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .answer-container {
+            margin-top: 10px;
+        }
+        .answer-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .wordsearch-controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .results-info {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-puzzle-piece"></i>
+                <h1>Tapsyr</h1>
+            </div>
+            <div class="task-info">
+                <span class="task-id">ID: 7654</span>
+            </div>
+        </header>
+
+        <main>
+            <div class="task-container">
+                <div class="task-header">
+                    <h2>Информатика - Негізгі түсініктер</h2>
+                    <p>Информатика пәні бойынша сұрақтар</p>
+                </div>
+
+                <div class="wordsearch-container">
+                    <div class="wordsearch-item" data-index="0">
+                        <div class="question-header">
+                            <span class="question-number">1</span>
+                            <h3>Компьютердің негізгі құрылғыларын атаңыз (кем дегенде 3)</h3>
+                        </div>
+                        <div class="answer-container">
+                            <input type="text" class="answer-input" placeholder="Жауабыңызды енгізіңіз..." data-index="0">
+                            <div class="feedback hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="wordsearch-item" data-index="1">
+                        <div class="question-header">
+                            <span class="question-number">2</span>
+                            <h3>HTML деген не?</h3>
+                        </div>
+                        <div class="answer-container">
+                            <input type="text" class="answer-input" placeholder="Жауабыңызды енгізіңіз..." data-index="1">
+                            <div class="feedback hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="wordsearch-item" data-index="2">
+                        <div class="question-header">
+                            <span class="question-number">3</span>
+                            <h3>Ақпаратты өлшеу бірліктерін атаңыз (кем дегенде 3)</h3>
+                        </div>
+                        <div class="answer-container">
+                            <input type="text" class="answer-input" placeholder="Жауабыңызды енгізіңіз..." data-index="2">
+                            <div class="feedback hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="wordsearch-item" data-index="3">
+                        <div class="question-header">
+                            <span class="question-number">4</span>
+                            <h3>Операциялық жүйе дегеніміз не?</h3>
+                        </div>
+                        <div class="answer-container">
+                            <input type="text" class="answer-input" placeholder="Жауабыңызды енгізіңіз..." data-index="3">
+                            <div class="feedback hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="wordsearch-item" data-index="4">
+                        <div class="question-header">
+                            <span class="question-number">5</span>
+                            <h3>Интернет дегеніміз не?</h3>
+                        </div>
+                        <div class="answer-container">
+                            <input type="text" class="answer-input" placeholder="Жауабыңызды енгізіңіз..." data-index="4">
+                            <div class="feedback hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="wordsearch-item" data-index="5">
+                        <div class="question-header">
+                            <span class="question-number">6</span>
+                            <h3>Программалау тілдерінің атауларын атаңыз (кем дегенде 3)</h3>
+                        </div>
+                        <div class="answer-container">
+                            <input type="text" class="answer-input" placeholder="Жауабыңызды енгізіңіз..." data-index="5">
+                            <div class="feedback hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="wordsearch-item" data-index="6">
+                        <div class="question-header">
+                            <span class="question-number">7</span>
+                            <h3>URL дегеніміз не?</h3>
+                        </div>
+                        <div class="answer-container">
+                            <input type="text" class="answer-input" placeholder="Жауабыңызды енгізіңіз..." data-index="6">
+                            <div class="feedback hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="wordsearch-controls">
+                        <button id="check-wordsearch-btn" class="primary-btn">Жауаптарды тексеру</button>
+                        <div class="wordsearch-results hidden">
+                            <h3>Нәтижелер</h3>
+                            <div class="results-info"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Тапсыр оқыту платформасы</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkBtn = document.getElementById('check-wordsearch-btn');
+            
+            if (checkBtn) {
+                checkBtn.addEventListener('click', function() {
+                    // Правильные ответы (разные варианты)
+                    const correctAnswers = [
+                        ['процессор', 'жады', 'монитор', 'пернетақта', 'тінтуір', 'жүйелік блок', 'дисплей', 'клавиатура', 'мышь'],
+                        ['гипермәтіндік белгілеу тілі', 'веб-беттерді жасау тілі', 'hypertext markup language', 'веб-парақтарды жасауға арналған тіл'],
+                        ['байт', 'килобайт', 'мегабайт', 'гигабайт', 'терабайт', 'бит', 'кб', 'мб', 'гб', 'тб'],
+                        ['компьютер жұмысын басқаратын бағдарлама', 'компьютердің негізгі бағдарламасы', 'windows', 'linux', 'macos', 'android', 'ios'],
+                        ['әлемдік компьютерлік желі', 'компьютерлік желілердің жүйесі', 'глобальды желі', 'әлемдік желі'],
+                        ['python', 'java', 'c++', 'javascript', 'php', 'c#', 'ruby', 'pascal', 'swift'],
+                        ['бірегей ресурстық локатор', 'веб-сайттың мекенжайы', 'сайттың адресі', 'uniform resource locator']
+                    ];
+                    
+                    let correctCount = 0;
+                    
+                    for (let i = 0; i < correctAnswers.length; i++) {
+                        const inputElement = document.querySelector(`.answer-input[data-index="${i}"]`);
+                        const feedbackElement = inputElement.parentElement.querySelector('.feedback');
+                        
+                        if (inputElement && feedbackElement) {
+                            feedbackElement.classList.remove('hidden', 'correct', 'incorrect');
+                            
+                            const userAnswer = inputElement.value.trim().toLowerCase();
+                            let isCorrect = false;
+                            
+                            // Проверяем все возможные варианты правильных ответов
+                            correctAnswers[i].forEach(ans => {
+                                if (userAnswer.includes(ans.toLowerCase()) || 
+                                    ans.toLowerCase().includes(userAnswer) ||
+                                    userAnswer.split(',').some(part => {
+                                        const trimmed = part.trim();
+                                        return ans.toLowerCase().includes(trimmed) && trimmed.length > 2;
+                                    })) {
+                                    isCorrect = true;
+                                }
+                            });
+                            
+                            if (isCorrect) {
+                                feedbackElement.textContent = 'Дұрыс!';
+                                feedbackElement.classList.add('correct');
+                                correctCount++;
+                            } else {
+                                feedbackElement.textContent = `Дұрыс емес. Жауап нұсқасы: ${correctAnswers[i][0]}`;
+                                feedbackElement.classList.add('incorrect');
+                            }
+                            
+                            feedbackElement.classList.remove('hidden');
+                        }
+                    }
+                    
+                    // Показываем результаты
+                    const resultsElement = document.querySelector('.wordsearch-results');
+                    const resultsInfoElement = document.querySelector('.results-info');
+                    
+                    if (resultsElement && resultsInfoElement) {
+                        const percentage = Math.round((correctCount / correctAnswers.length) * 100);
+                        resultsInfoElement.innerHTML = `
+                            <p>Дұрыс жауаптар: ${correctCount} / ${correctAnswers.length} (${percentage}%)</p>
+                        `;
+                        
+                        resultsElement.classList.remove('hidden');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

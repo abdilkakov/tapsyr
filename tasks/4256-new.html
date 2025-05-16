@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информатика - Сәйкестендіру | Tapsyr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3763/3763365.png" type="image/png">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --primary-light: #7289da;
+            --primary-dark: #3a0ca3;
+            --secondary-color: #f72585;
+            --accent-color: #4cc9f0;
+            --success-color: #43aa8b;
+            --background-color: #f8f9ff;
+            --card-color: #ffffff;
+            --text-color: #2b2d42;
+            --text-light: #6c757d;
+            --border-radius: 12px;
+            --shadow: 0 8px 30px rgba(0,0,0,0.05);
+            --shadow-hover: 0 15px 60px rgba(0,0,0,0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: var(--card-color);
+            box-shadow: var(--shadow);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-right: 0.5rem;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .task-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .task-id {
+            background-color: var(--primary-light);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        
+        .share-btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+        
+        .share-btn:hover {
+            background-color: #d01a6e;
+            transform: translateY(-2px);
+        }
+        
+        .share-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .share-dialog {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .share-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .share-header h3 {
+            color: var(--primary-color);
+            margin: 0;
+        }
+        
+        .share-header button {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .share-content {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        
+        .share-content input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ced4da;
+            border-radius: 8px 0 0 8px;
+            font-size: 0.9rem;
+        }
+        
+        .share-content button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0 1rem;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+        }
+        
+        .share-info {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .task-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+        }
+
+        .task-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+
+        .task-header h2 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .task-header p {
+            color: var(--text-light);
+        }
+
+        .match-instructions {
+            background: var(--background-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .match-instructions p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .match-game {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            gap: 2rem;
+        }
+
+        .match-items {
+            width: 48%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .match-item {
+            background: var(--background-color);
+            border-radius: var(--border-radius);
+            padding: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .match-item p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .match-item.selected {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .match-item.connected {
+            background: var(--success-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(67, 170, 139, 0.3);
+        }
+
+        .match-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        .match-results {
+            margin-top: 1.5rem;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .match-results h3 {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .results-info {
+            background: var(--background-color);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .results-info p {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        footer {
+            background-color: var(--card-color);
+            padding: 1.5rem;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.03);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-puzzle-piece"></i>
+                <h1>Tapsyr</h1>
+            </div>
+            <div class="task-info">
+                <span class="task-id">ID: 4256</span>
+                <button class="share-btn" id="share-btn">
+                    <i class="fas fa-share-alt"></i> Бөлісу
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <div class="task-container">
+                <div class="task-header">
+                    <h2>Информатика - Сәйкестендіру тапсырмасы</h2>
+                    <p>Терминдер мен олардың анықтамаларын сәйкестендіріңіз</p>
+                </div>
+
+                <div class="match-container">
+                    <div class="match-instructions">
+                        <p>Сол жақтағы терминдерді оң жақтағы сәйкес анықтамалармен жұптастырыңыз.</p>
+                    </div>
+                    <div class="match-game">
+                        <div class="match-items left-items">
+                            <div class="match-item" data-index="0" data-side="left">
+                                <p>HTML</p>
+                            </div>
+                            <div class="match-item" data-index="1" data-side="left">
+                                <p>CPU</p>
+                            </div>
+                            <div class="match-item" data-index="2" data-side="left">
+                                <p>RAM</p>
+                            </div>
+                            <div class="match-item" data-index="3" data-side="left">
+                                <p>URL</p>
+                            </div>
+                            <div class="match-item" data-index="4" data-side="left">
+                                <p>WWW</p>
+                            </div>
+                            <div class="match-item" data-index="5" data-side="left">
+                                <p>GUI</p>
+                            </div>
+                            <div class="match-item" data-index="6" data-side="left">
+                                <p>LAN</p>
+                            </div>
+                            <div class="match-item" data-index="7" data-side="left">
+                                <p>DNS</p>
+                            </div>
+                            <div class="match-item" data-index="8" data-side="left">
+                                <p>API</p>
+                            </div>
+                            <div class="match-item" data-index="9" data-side="left">
+                                <p>CSS</p>
+                            </div>
+                        </div>
+                        <div class="match-items right-items">
+                            <div class="match-item" data-index="0" data-side="right">
+                                <p>Веб-беттерді жасауға арналған белгілеу тілі</p>
+                            </div>
+                            <div class="match-item" data-index="1" data-side="right">
+                                <p>Компьютердің орталық процессоры</p>
+                            </div>
+                            <div class="match-item" data-index="2" data-side="right">
+                                <p>Компьютердің жедел жады</p>
+                            </div>
+                            <div class="match-item" data-index="3" data-side="right">
+                                <p>Бірегей ресурстық локатор</p>
+                            </div>
+                            <div class="match-item" data-index="4" data-side="right">
+                                <p>Әлемдік ауқымды тор</p>
+                            </div>
+                            <div class="match-item" data-index="5" data-side="right">
+                                <p>Графикалық пайдаланушы интерфейсі</p>
+                            </div>
+                            <div class="match-item" data-index="6" data-side="right">
+                                <p>Жергілікті аудандық желі</p>
+                            </div>
+                            <div class="match-item" data-index="7" data-side="right">
+                                <p>Домендік атаулар жүйесі</p>
+                            </div>
+                            <div class="match-item" data-index="8" data-side="right">
+                                <p>Қолданбалы программалау интерфейсі</p>
+                            </div>
+                            <div class="match-item" data-index="9" data-side="right">
+                                <p>Каскадты стиль кестелері</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="match-controls">
+                        <button id="check-matches-btn" class="primary-btn">Жауаптарды тексеру</button>
+                        <div class="match-results hidden">
+                            <h3>Нәтижелер</h3>
+                            <div class="results-info"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Тапсыр оқыту платформасы</p>
+        </footer>
+    </div>
+    
+    <!-- Диалог шаринга -->
+    <div class="share-overlay hidden" id="share-overlay">
+        <div class="share-dialog">
+            <div class="share-header">
+                <h3>Тапсырмамен бөлісу</h3>
+                <button id="close-share-btn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="share-content">
+                <input type="text" id="share-url" readonly>
+                <button id="copy-link-btn" title="Көшіру"><i class="fas fa-copy"></i></button>
+            </div>
+            <p class="share-info">Бұл сілтемені бөлісу арқылы басқалар тапсырманы көре алады</p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const matchItems = document.querySelectorAll('.match-item');
+            let selectedItem = null;
+            const connections = new Map();
+            
+            // Добавляем обработчики для элементов
+            matchItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    const side = this.dataset.side;
+                    
+                    if (selectedItem) {
+                        const selectedIndex = parseInt(selectedItem.dataset.index);
+                        const selectedSide = selectedItem.dataset.side;
+                        
+                        if (selectedSide !== side) {
+                            // Если элемент уже подключен, отключаем предыдущее соединение
+                            if (side === 'left') {
+                                // Находим предыдущее соединение и отключаем его
+                                if (connections.has(index)) {
+                                    const oldRightItem = document.querySelector(`.match-item[data-index="${connections.get(index)}"][data-side="right"]`);
+                                    if (oldRightItem) {
+                                        oldRightItem.classList.remove('connected');
+                                    }
+                                }
+                                connections.set(index, selectedIndex);
+                            } else {
+                                // Находим предыдущее соединение и отключаем его
+                                for (const [leftIndex, rightIndex] of connections.entries()) {
+                                    if (rightIndex === index) {
+                                        const oldLeftItem = document.querySelector(`.match-item[data-index="${leftIndex}"][data-side="left"]`);
+                                        if (oldLeftItem) {
+                                            oldLeftItem.classList.remove('connected');
+                                        }
+                                        connections.delete(leftIndex);
+                                    }
+                                }
+                                // Устанавливаем новое соединение
+                                connections.set(selectedIndex, index);
+                            }
+                            
+                            // Добавляем визуальное выделение
+                            this.classList.add('connected');
+                            selectedItem.classList.add('connected');
+                            
+                            // Сбрасываем выбранный элемент
+                            selectedItem.classList.remove('selected');
+                            selectedItem = null;
+                        } else {
+                            // Выбрали элемент с той же стороны
+                            selectedItem.classList.remove('selected');
+                            this.classList.add('selected');
+                            selectedItem = this;
+                        }
+                    } else {
+                        // Выбираем элемент
+                        this.classList.add('selected');
+                        selectedItem = this;
+                    }
+                });
+            });
+            
+            // Настраиваем кнопку шаринга
+            const shareBtn = document.getElementById('share-btn');
+            const shareOverlay = document.getElementById('share-overlay');
+            const closeShareBtn = document.getElementById('close-share-btn');
+            const shareUrl = document.getElementById('share-url');
+            const copyLinkBtn = document.getElementById('copy-link-btn');
+            
+            if (shareBtn && shareOverlay && closeShareBtn && shareUrl && copyLinkBtn) {
+                // Обработчик для кнопки шаринга
+                shareBtn.addEventListener('click', function() {
+                    shareUrl.value = window.location.href;
+                    shareOverlay.classList.remove('hidden');
+                });
+                
+                // Обработчик для закрытия диалога
+                closeShareBtn.addEventListener('click', function() {
+                    shareOverlay.classList.add('hidden');
+                });
+                
+                // Обработчик для клика вне диалога
+                shareOverlay.addEventListener('click', function(e) {
+                    if (e.target === shareOverlay) {
+                        shareOverlay.classList.add('hidden');
+                    }
+                });
+                
+                // Обработчик для кнопки копирования
+                copyLinkBtn.addEventListener('click', function() {
+                    shareUrl.select();
+                    document.execCommand('copy');
+                    
+                    // Показываем подтверждение
+                    const originalIcon = copyLinkBtn.innerHTML;
+                    copyLinkBtn.innerHTML = '<i class="fas fa-check"></i>';
+                    setTimeout(function() {
+                        copyLinkBtn.innerHTML = originalIcon;
+                    }, 2000);
+                });
+            }
+            
+            // Настраиваем кнопку проверки
+            const checkMatchesBtn = document.getElementById('check-matches-btn');
+            
+            if (checkMatchesBtn) {
+                checkMatchesBtn.addEventListener('click', function() {
+                    let correctCount = 0;
+                    
+                    // Проверяем каждую пару
+                    for (let i = 0; i < 10; i++) {
+                        const matchedIndex = connections.get(i);
+                        
+                        if (matchedIndex !== undefined && matchedIndex === i) {
+                            correctCount++;
+                        }
+                    }
+                    
+                    // Показываем результаты
+                    const resultsElement = document.querySelector('.match-results');
+                    const resultsInfoElement = document.querySelector('.results-info');
+                    
+                    if (resultsElement && resultsInfoElement) {
+                        const percentage = Math.round((correctCount / 10) * 100);
+                        resultsInfoElement.innerHTML = `
+                            <p>Дұрыс жұптар: ${correctCount} / 10 (${percentage}%)</p>
+                        `;
+                        
+                        resultsElement.classList.remove('hidden');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

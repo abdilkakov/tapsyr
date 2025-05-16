@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информатика - Сұрақ-жауап | Tapsyr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3763/3763365.png" type="image/png">
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --primary-light: #7289da;
+            --primary-dark: #3a0ca3;
+            --secondary-color: #f72585;
+            --accent-color: #4cc9f0;
+            --success-color: #43aa8b;
+            --background-color: #f8f9ff;
+            --card-color: #ffffff;
+            --text-color: #2b2d42;
+            --text-light: #6c757d;
+            --border-radius: 12px;
+            --shadow: 0 8px 30px rgba(0,0,0,0.05);
+            --shadow-hover: 0 15px 60px rgba(0,0,0,0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: var(--card-color);
+            box-shadow: var(--shadow);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-right: 0.5rem;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .task-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .task-id {
+            background-color: var(--primary-light);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        .task-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+        }
+
+        .task-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+        }
+
+        .task-header h2 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .task-header p {
+            color: var(--text-light);
+        }
+
+        .wordsearch-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .wordsearch-item {
+            background: var(--background-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: var(--transition);
+        }
+
+        .wordsearch-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .question-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .question-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            margin-right: 1rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .question-header h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .answer-container {
+            margin-top: 1rem;
+        }
+
+        .answer-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .answer-input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+        }
+
+        .feedback {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .feedback.correct {
+            background-color: rgba(67, 170, 139, 0.15);
+            color: var(--success-color);
+        }
+
+        .feedback.incorrect {
+            background-color: rgba(247, 37, 133, 0.15);
+            color: var(--secondary-color);
+        }
+
+        .wordsearch-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        .wordsearch-results {
+            margin-top: 1.5rem;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .wordsearch-results h3 {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .results-info {
+            background: var(--background-color);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .results-info p {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        footer {
+            background-color: var(--card-color);
+            padding: 1.5rem;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            box-shadow: 0 -4px 10px rgba(0,0,0,0.03);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-puzzle-piece"></i>
+                <h1>Tapsyr</h1>
+            </div>
+            <div class="task-info">
+                <span class="task-id">ID: 7654</span>
+            </div>
+        </header>
+
+        <main>
+            <div class="task-container">
+                <div class="task-header">
+                    <h2>Информатика - Негізгі түсініктер</h2>
+                    <p>Информатика пәні бойынша сұрақтар</p>
+                </div>
+
+                <div class="wordsearch-container">
+                    <div class="wordsearch-item" data-index="0">
+                        <div class="question-header">
+                            <span class="question-number">1</span>
+                            <h3>Компьютердің негізгі құрылғыларын атаңыз (кем дегенде 3)</h3>
+                        </div>
+                        <div class="answer-container">
+                            <input type="text" class="answer-input" placeholder="Жауабыңызды енгізіңіз..." data-index="0">
+                            <div class="feedback hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="wordsearch-item" data-index="1">
+                        <div class="question-header">
+                            <span class="question-number">2</span>
+                            <h3>HTML деген не?</h3>
+                        </div>
+                        <div class="answer-container">
+                            <input type="text" class="answer-input" placeholder="Жауабыңызды енгізіңіз..." data-index="1">
+                            <div class="feedback hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="wordsearch-item" data-index="2">
+                        <div class="question-header">
+                            <span class="question-number">3</span>
+                            <h3>Ақпаратты өлшеу бірліктерін атаңыз (кем дегенде 3)</h3>
+                        </div>
+                        <div class="answer-container">
+                            <input type="text" class="answer-input" placeholder="Жауабыңызды енгізіңіз..." data-index="2">
+                            <div class="feedback hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="wordsearch-item" data-index="3">
+                        <div class="question-header">
+                            <span class="question-number">4</span>
+                            <h3>Операциялық жүйе дегеніміз не?</h3>
+                        </div>
+                        <div class="answer-container">
+                            <input type="text" class="answer-input" placeholder="Жауабыңызды енгізіңіз..." data-index="3">
+                            <div class="feedback hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="wordsearch-item" data-index="4">
+                        <div class="question-header">
+                            <span class="question-number">5</span>
+                            <h3>Интернет дегеніміз не?</h3>
+                        </div>
+                        <div class="answer-container">
+                            <input type="text" class="answer-input" placeholder="Жауабыңызды енгізіңіз..." data-index="4">
+                            <div class="feedback hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="wordsearch-item" data-index="5">
+                        <div class="question-header">
+                            <span class="question-number">6</span>
+                            <h3>Программалау тілдерінің атауларын атаңыз (кем дегенде 3)</h3>
+                        </div>
+                        <div class="answer-container">
+                            <input type="text" class="answer-input" placeholder="Жауабыңызды енгізіңіз..." data-index="5">
+                            <div class="feedback hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="wordsearch-item" data-index="6">
+                        <div class="question-header">
+                            <span class="question-number">7</span>
+                            <h3>URL дегеніміз не?</h3>
+                        </div>
+                        <div class="answer-container">
+                            <input type="text" class="answer-input" placeholder="Жауабыңызды енгізіңіз..." data-index="6">
+                            <div class="feedback hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="wordsearch-item" data-index="7">
+                        <div class="question-header">
+                            <span class="question-number">8</span>
+                            <h3>База данных (мәліметтер қоры) дегеніміз не?</h3>
+                        </div>
+                        <div class="answer-container">
+                            <input type="text" class="answer-input" placeholder="Жауабыңызды енгізіңіз..." data-index="7">
+                            <div class="feedback hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="wordsearch-item" data-index="8">
+                        <div class="question-header">
+                            <span class="question-number">9</span>
+                            <h3>Wi-Fi дегеніміз не?</h3>
+                        </div>
+                        <div class="answer-container">
+                            <input type="text" class="answer-input" placeholder="Жауабыңызды енгізіңіз..." data-index="8">
+                            <div class="feedback hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="wordsearch-item" data-index="9">
+                        <div class="question-header">
+                            <span class="question-number">10</span>
+                            <h3>USB дегеніміз не?</h3>
+                        </div>
+                        <div class="answer-container">
+                            <input type="text" class="answer-input" placeholder="Жауабыңызды енгізіңіз..." data-index="9">
+                            <div class="feedback hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="wordsearch-controls">
+                        <button id="check-wordsearch-btn" class="primary-btn">Жауаптарды тексеру</button>
+                        <div class="wordsearch-results hidden">
+                            <h3>Нәтижелер</h3>
+                            <div class="results-info"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Тапсыр оқыту платформасы</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkBtn = document.getElementById('check-wordsearch-btn');
+            
+            if (checkBtn) {
+                checkBtn.addEventListener('click', function() {
+                    // Правильные ответы (разные варианты)
+                    const correctAnswers = [
+                        ['процессор', 'жады', 'монитор', 'пернетақта', 'тінтуір', 'жүйелік блок', 'дисплей', 'клавиатура', 'мышь'],
+                        ['гипермәтіндік белгілеу тілі', 'веб-беттерді жасау тілі', 'hypertext markup language', 'веб-парақтарды жасауға арналған тіл'],
+                        ['байт', 'килобайт', 'мегабайт', 'гигабайт', 'терабайт', 'бит', 'кб', 'мб', 'гб', 'тб'],
+                        ['компьютер жұмысын басқаратын бағдарлама', 'компьютердің негізгі бағдарламасы', 'windows', 'linux', 'macos', 'android', 'ios'],
+                        ['әлемдік компьютерлік желі', 'компьютерлік желілердің жүйесі', 'глобальды желі', 'әлемдік желі'],
+                        ['python', 'java', 'c++', 'javascript', 'php', 'c#', 'ruby', 'pascal', 'swift'],
+                        ['бірегей ресурстық локатор', 'веб-сайттың мекенжайы', 'сайттың адресі', 'uniform resource locator'],
+                        ['ақпараттарды сақтайтын жүйе', 'мәліметтер жинағы', 'құрылымдалған ақпарат жиынтығы', 'деректер қоры'],
+                        ['сымсыз байланыс технологиясы', 'сымсыз желі', 'сымсыз интернет', 'wireless'],
+                        ['әмбебап тізбекті шина', 'компьютер құрылғыларын қосуға арналған порт', 'universal serial bus']
+                    ];
+                    
+                    let correctCount = 0;
+                    
+                    for (let i = 0; i < correctAnswers.length; i++) {
+                        const inputElement = document.querySelector(`.answer-input[data-index="${i}"]`);
+                        const feedbackElement = inputElement.parentElement.querySelector('.feedback');
+                        
+                        if (inputElement && feedbackElement) {
+                            feedbackElement.classList.remove('hidden', 'correct', 'incorrect');
+                            
+                            const userAnswer = inputElement.value.trim().toLowerCase();
+                            let isCorrect = false;
+                            
+                            // Проверяем все возможные варианты правильных ответов
+                            correctAnswers[i].forEach(ans => {
+                                if (userAnswer.includes(ans.toLowerCase()) || 
+                                    ans.toLowerCase().includes(userAnswer) ||
+                                    userAnswer.split(',').some(part => {
+                                        const trimmed = part.trim();
+                                        return ans.toLowerCase().includes(trimmed) && trimmed.length > 2;
+                                    })) {
+                                    isCorrect = true;
+                                }
+                            });
+                            
+                            if (isCorrect) {
+                                feedbackElement.textContent = 'Дұрыс!';
+                                feedbackElement.classList.add('correct');
+                                correctCount++;
+                            } else {
+                                feedbackElement.textContent = `Дұрыс емес. Жауап нұсқасы: ${correctAnswers[i][0]}`;
+                                feedbackElement.classList.add('incorrect');
+                            }
+                            
+                            feedbackElement.classList.remove('hidden');
+                        }
+                    }
+                    
+                    // Показываем результаты
+                    const resultsElement = document.querySelector('.wordsearch-results');
+                    const resultsInfoElement = document.querySelector('.results-info');
+                    
+                    if (resultsElement && resultsInfoElement) {
+                        const percentage = Math.round((correctCount / correctAnswers.length) * 100);
+                        resultsInfoElement.innerHTML = `
+                            <p>Дұрыс жауаптар: ${correctCount} / ${correctAnswers.length} (${percentage}%)</p>
+                        `;
+                        
+                        resultsElement.classList.remove('hidden');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

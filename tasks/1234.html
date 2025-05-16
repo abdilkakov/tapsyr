@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Математика - Викторина | Tapsyr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .task-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .task-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        .quiz-question {
+            margin-bottom: 25px;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .question-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .question-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: #5e81ac;
+            color: white;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .options-container {
+            margin-left: 40px;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .option input[type="radio"] {
+            margin-right: 10px;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .quiz-controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .results-info {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-puzzle-piece"></i>
+                <h1>Tapsyr</h1>
+            </div>
+            <div class="task-info">
+                <span class="task-id">ID: 1234</span>
+            </div>
+        </header>
+
+        <main>
+            <div class="task-container">
+                <div class="task-header">
+                    <h2>Информатика викторинасы</h2>
+                    <p>Информатика бойынша базалық білімдерді тексеруге арналған викторина</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question" data-question-index="0">
+                        <div class="question-header">
+                            <span class="question-number">1</span>
+                            <h3>1 байт неше бит?</h3>
+                        </div>
+                        <div class="options-container">
+                            <div class="option">
+                                <input type="radio" id="q0_o0" name="q0" value="0">
+                                <label for="q0_o0">4 бит</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q0_o1" name="q0" value="1">
+                                <label for="q0_o1">8 бит</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q0_o2" name="q0" value="2">
+                                <label for="q0_o2">16 бит</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q0_o3" name="q0" value="3">
+                                <label for="q0_o3">32 бит</label>
+                            </div>
+                        </div>
+                        <div class="feedback hidden"></div>
+                    </div>
+
+                    <div class="quiz-question" data-question-index="1">
+                        <div class="question-header">
+                            <span class="question-number">2</span>
+                            <h3>HTML тегтері қандай символдармен белгіленеді?</h3>
+                        </div>
+                        <div class="options-container">
+                            <div class="option">
+                                <input type="radio" id="q1_o0" name="q1" value="0">
+                                <label for="q1_o0">&lt; және &gt;</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q1_o1" name="q1" value="1">
+                                <label for="q1_o1">[ және ]</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q1_o2" name="q1" value="2">
+                                <label for="q1_o2">{ және }</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q1_o3" name="q1" value="3">
+                                <label for="q1_o3">( және )</label>
+                            </div>
+                        </div>
+                        <div class="feedback hidden"></div>
+                    </div>
+
+                    <div class="quiz-question" data-question-index="2">
+                        <div class="question-header">
+                            <span class="question-number">3</span>
+                            <h3>Қай бағдарламалау тілі веб-сайттардың интерактивтілігін жақсарту үшін қолданылады?</h3>
+                        </div>
+                        <div class="options-container">
+                            <div class="option">
+                                <input type="radio" id="q2_o0" name="q2" value="0">
+                                <label for="q2_o0">C++</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q2_o1" name="q2" value="1">
+                                <label for="q2_o1">JavaScript</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q2_o2" name="q2" value="2">
+                                <label for="q2_o2">Ruby</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q2_o3" name="q2" value="3">
+                                <label for="q2_o3">Pascal</label>
+                            </div>
+                        </div>
+                        <div class="feedback hidden"></div>
+                    </div>
+
+                    <div class="quiz-question" data-question-index="3">
+                        <div class="question-header">
+                            <span class="question-number">4</span>
+                            <h3>IP-адрестің әдеттегі форматы қандай?</h3>
+                        </div>
+                        <div class="options-container">
+                            <div class="option">
+                                <input type="radio" id="q3_o0" name="q3" value="0">
+                                <label for="q3_o0">000.000.000.000</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q3_o1" name="q3" value="1">
+                                <label for="q3_o1">xxx.xxx.xxx.xxx</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q3_o2" name="q3" value="2">
+                                <label for="q3_o2">AAA.BBB.CCC.DDD</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q3_o3" name="q3" value="3">
+                                <label for="q3_o3">www.xxx.yyy.zzz</label>
+                            </div>
+                        </div>
+                        <div class="feedback hidden"></div>
+                    </div>
+
+                    <div class="quiz-question" data-question-index="4">
+                        <div class="question-header">
+                            <span class="question-number">5</span>
+                            <h3>Төмендегілердің қайсысы операциялық жүйе болып табылмайды?</h3>
+                        </div>
+                        <div class="options-container">
+                            <div class="option">
+                                <input type="radio" id="q4_o0" name="q4" value="0">
+                                <label for="q4_o0">Windows</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q4_o1" name="q4" value="1">
+                                <label for="q4_o1">Microsoft Office</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q4_o2" name="q4" value="2">
+                                <label for="q4_o2">Linux</label>
+                            </div>
+                            <div class="option">
+                                <input type="radio" id="q4_o3" name="q4" value="3">
+                                <label for="q4_o3">macOS</label>
+                            </div>
+                        </div>
+                        <div class="feedback hidden"></div>
+                    </div>
+
+                    <div class="quiz-controls">
+                        <button id="check-answers-btn" class="primary-btn">Жауаптарды тексеру</button>
+                        <div class="quiz-results hidden">
+                            <h3>Нәтижелер</h3>
+                            <div class="results-info"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Тапсыр оқыту платформасы</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkAnswersBtn = document.getElementById('check-answers-btn');
+            
+            if (checkAnswersBtn) {
+                checkAnswersBtn.addEventListener('click', function() {
+                    // Правильные ответы (индексы)
+                    const correctAnswers = [1, 0, 1, 1, 1];
+                    let correctCount = 0;
+                    
+                    for (let i = 0; i < correctAnswers.length; i++) {
+                        const questionElement = document.querySelector(`.quiz-question[data-question-index="${i}"]`);
+                        const feedbackElement = questionElement.querySelector('.feedback');
+                        const selectedOption = questionElement.querySelector(`input[name="q${i}"]:checked`);
+                        
+                        if (feedbackElement) {
+                            feedbackElement.classList.remove('hidden', 'correct', 'incorrect');
+                            
+                            if (selectedOption) {
+                                const selectedIndex = parseInt(selectedOption.value);
+                                if (selectedIndex === correctAnswers[i]) {
+                                    feedbackElement.textContent = 'Дұрыс!';
+                                    feedbackElement.classList.add('correct');
+                                    correctCount++;
+                                } else {
+                                    const correctOptionText = questionElement.querySelector(`label[for="q${i}_o${correctAnswers[i]}"]`).textContent;
+                                    feedbackElement.textContent = `Дұрыс емес. Дұрыс жауап: ${correctOptionText}`;
+                                    feedbackElement.classList.add('incorrect');
+                                }
+                            } else {
+                                feedbackElement.textContent = 'Жауап таңдалған жоқ.';
+                                feedbackElement.classList.add('incorrect');
+                            }
+                            
+                            feedbackElement.classList.remove('hidden');
+                        }
+                    }
+                    
+                    // Показываем результаты
+                    const resultsElement = document.querySelector('.quiz-results');
+                    const resultsInfoElement = document.querySelector('.results-info');
+                    
+                    if (resultsElement && resultsInfoElement) {
+                        const percentage = Math.round((correctCount / correctAnswers.length) * 100);
+                        resultsInfoElement.innerHTML = `
+                            <p>Дұрыс жауаптар: ${correctCount} / ${correctAnswers.length} (${percentage}%)</p>
+                        `;
+                        
+                        resultsElement.classList.remove('hidden');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

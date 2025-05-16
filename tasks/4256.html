@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>География - Сәйкестендіру | Tapsyr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .task-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .task-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        .match-instructions {
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .match-game {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        .match-items {
+            width: 45%;
+        }
+        .match-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f1f3f5;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .match-item.selected {
+            background: #5e81ac;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .match-item.connected {
+            background: #a3be8c;
+            color: white;
+        }
+        .match-controls {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .results-info {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-puzzle-piece"></i>
+                <h1>Tapsyr</h1>
+            </div>
+            <div class="task-info">
+                <span class="task-id">ID: 4256</span>
+            </div>
+        </header>
+
+        <main>
+            <div class="task-container">
+                <div class="task-header">
+                    <h2>Информатика - Сәйкестендіру тапсырмасы</h2>
+                    <p>Терминдер мен олардың анықтамаларын сәйкестендіріңіз</p>
+                </div>
+
+                <div class="match-container">
+                    <div class="match-instructions">
+                        <p>Сол жақтағы терминдерді оң жақтағы сәйкес анықтамалармен жұптастырыңыз.</p>
+                    </div>
+                    <div class="match-game">
+                        <div class="match-items left-items">
+                            <div class="match-item" data-index="0" data-side="left">
+                                <p>HTML</p>
+                            </div>
+                            <div class="match-item" data-index="1" data-side="left">
+                                <p>CPU</p>
+                            </div>
+                            <div class="match-item" data-index="2" data-side="left">
+                                <p>RAM</p>
+                            </div>
+                            <div class="match-item" data-index="3" data-side="left">
+                                <p>URL</p>
+                            </div>
+                            <div class="match-item" data-index="4" data-side="left">
+                                <p>WWW</p>
+                            </div>
+                            <div class="match-item" data-index="5" data-side="left">
+                                <p>GUI</p>
+                            </div>
+                            <div class="match-item" data-index="6" data-side="left">
+                                <p>LAN</p>
+                            </div>
+                        </div>
+                        <div class="match-items right-items">
+                            <div class="match-item" data-index="0" data-side="right">
+                                <p>Веб-беттерді жасауға арналған белгілеу тілі</p>
+                            </div>
+                            <div class="match-item" data-index="1" data-side="right">
+                                <p>Компьютердің орталық процессоры</p>
+                            </div>
+                            <div class="match-item" data-index="6" data-side="right">
+                                <p>Жергілікті аудандық желі</p>
+                            </div>
+                            <div class="match-item" data-index="5" data-side="right">
+                                <p>Графикалық пайдаланушы интерфейсі</p>
+                            </div>
+                            <div class="match-item" data-index="2" data-side="right">
+                                <p>Компьютердің жедел жады</p>
+                            </div>
+                            <div class="match-item" data-index="3" data-side="right">
+                                <p>Бірегей ресурстық локатор</p>
+                            </div>
+                            <div class="match-item" data-index="4" data-side="right">
+                                <p>Әлемдік ауқымды тор</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="match-controls">
+                        <button id="check-matches-btn" class="primary-btn">Жауаптарды тексеру</button>
+                        <div class="match-results hidden">
+                            <h3>Нәтижелер</h3>
+                            <div class="results-info"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 Тапсыр оқыту платформасы</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const matchItems = document.querySelectorAll('.match-item');
+            let selectedItem = null;
+            const connections = new Map();
+            
+            // Добавляем обработчики для элементов
+            matchItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.index);
+                    const side = this.dataset.side;
+                    
+                    if (selectedItem) {
+                        const selectedIndex = parseInt(selectedItem.dataset.index);
+                        const selectedSide = selectedItem.dataset.side;
+                        
+                        if (selectedSide !== side) {
+                            // Если элемент уже подключен, отключаем предыдущее соединение
+                            if (side === 'left') {
+                                // Находим предыдущее соединение и отключаем его
+                                if (connections.has(index)) {
+                                    const oldRightItem = document.querySelector(`.match-item[data-index="${connections.get(index)}"][data-side="right"]`);
+                                    if (oldRightItem) {
+                                        oldRightItem.classList.remove('connected');
+                                    }
+                                }
+                                connections.set(index, selectedIndex);
+                            } else {
+                                // Находим предыдущее соединение и отключаем его
+                                for (const [leftIndex, rightIndex] of connections.entries()) {
+                                    if (rightIndex === index) {
+                                        const oldLeftItem = document.querySelector(`.match-item[data-index="${leftIndex}"][data-side="left"]`);
+                                        if (oldLeftItem) {
+                                            oldLeftItem.classList.remove('connected');
+                                        }
+                                        connections.delete(leftIndex);
+                                    }
+                                }
+                                // Устанавливаем новое соединение
+                                connections.set(selectedIndex, index);
+                            }
+                            
+                            // Добавляем визуальное выделение
+                            this.classList.add('connected');
+                            selectedItem.classList.add('connected');
+                            
+                            // Сбрасываем выбранный элемент
+                            selectedItem.classList.remove('selected');
+                            selectedItem = null;
+                        } else {
+                            // Выбрали элемент с той же стороны
+                            selectedItem.classList.remove('selected');
+                            this.classList.add('selected');
+                            selectedItem = this;
+                        }
+                    } else {
+                        // Выбираем элемент
+                        this.classList.add('selected');
+                        selectedItem = this;
+                    }
+                });
+            });
+            
+            // Настраиваем кнопку проверки
+            const checkMatchesBtn = document.getElementById('check-matches-btn');
+            
+            if (checkMatchesBtn) {
+                checkMatchesBtn.addEventListener('click', function() {
+                    let correctCount = 0;
+                    
+                    // Проверяем каждую пару
+                    for (let i = 0; i < 7; i++) {
+                        const matchedIndex = connections.get(i);
+                        
+                        if (matchedIndex !== undefined && matchedIndex === i) {
+                            correctCount++;
+                        }
+                    }
+                    
+                    // Показываем результаты
+                    const resultsElement = document.querySelector('.match-results');
+                    const resultsInfoElement = document.querySelector('.results-info');
+                    
+                    if (resultsElement && resultsInfoElement) {
+                        const percentage = Math.round((correctCount / 7) * 100);
+                        resultsInfoElement.innerHTML = `
+                            <p>Дұрыс жұптар: ${correctCount} / 7 (${percentage}%)</p>
+                        `;
+                        
+                        resultsElement.classList.remove('hidden');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
